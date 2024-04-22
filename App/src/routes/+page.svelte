@@ -7,7 +7,7 @@
     $: isDisabled = false ;
     let show : string = "none" ;
     let checkCount = 0 ;
-    let chance : string = "X" ;
+    // let chance : string = "X" ;
   
     let valueArray = [["-", "-", "-"],
                       ["-", "-", "-"],
@@ -51,25 +51,25 @@
       {
         valueArray[Math.floor(num / 10)][num % 10] = char ;
         char = char === "X" ? "O" : "X" ;
-        chance = char === "X" ? "two" : "one" ;
-        let button : HTMLElement | null = document.getElementById(`${chance}`);
-        if( button )
-        {
-          if(chance === "X")
-          {
-            button.style.border = '3px solid red' ;
-            button = document.getElementById('one');
-            if(button)
-            button.style.border = '3px solid white' ;
-          }
-          else
-          {
-            button.style.border = '3px solid red' ;
-            button = document.getElementById('two');
-            if(button)
-            button.style.border = '3px solid white' ;
-          }
-        }
+        // chance = char === "X" ? "two" : "one" ;
+        // let button : HTMLElement | null = document.getElementById(`${chance}`);
+        // if( button )
+        // {
+        //   if(chance === "X")
+        //   {
+        //     button.style.border = '3px solid red' ;
+        //     button = document.getElementById('one');
+        //     if(button)
+        //     button.style.border = '3px solid white' ;
+        //   }
+        //   else
+        //   {
+        //     button.style.border = '3px solid red' ;
+        //     button = document.getElementById('two');
+        //     if(button)
+        //     button.style.border = '3px solid white' ;
+        //   }
+        // }
       }
     }
   
@@ -182,7 +182,7 @@
       </div>
     </div>
 
-    <div class="box" style="display: {show};">
+    <!-- <div class="box" style="display: {show};">
       <div>
         <div id="one" class="players one">
         {player_1}
@@ -192,7 +192,7 @@
           {player_2}
           </div>
       </div>
-    </div>
+    </div> -->
 
   
     <div class="box" style="display: {show};">
@@ -209,9 +209,8 @@
       </div>
     </div>
   </main>
-  
-  <style>
-    .one
+
+  <!-- .one
     {
       margin-right: 10px;
     }
@@ -223,6 +222,9 @@
       width: 5em;
       text-align: center;
     }
+   -->
+  <style>
+    
     .boxContainer 
     {
       background-color: rgba(255, 255, 255, 0.2) !important;
