@@ -7,6 +7,7 @@
     $: isDisabled = false ;
     let show : string = "none" ;
     let checkCount = 0 ;
+    let chance : string = "X" ;
   
     let valueArray = [["-", "-", "-"],
                       ["-", "-", "-"],
@@ -25,6 +26,10 @@
         if( player_1 === player_2 )
         {
           toast.error("Name must be unique")
+        }
+        else if( player_1.length > 10 || player_2.length > 10 )
+        {
+          toast.error("Name size should be < 10 characters !") ;
         }
         else
         {
@@ -46,6 +51,25 @@
       {
         valueArray[Math.floor(num / 10)][num % 10] = char ;
         char = char === "X" ? "O" : "X" ;
+        chance = char === "X" ? "two" : "one" ;
+        let button : HTMLElement | null = document.getElementById(`${chance}`);
+        if( button )
+        {
+          if(chance === "X")
+          {
+            button.style.border = '3px solid red' ;
+            button = document.getElementById('one');
+            if(button)
+            button.style.border = '3px solid white' ;
+          }
+          else
+          {
+            button.style.border = '3px solid red' ;
+            button = document.getElementById('two');
+            if(button)
+            button.style.border = '3px solid white' ;
+          }
+        }
       }
     }
   
@@ -91,7 +115,7 @@
             }
             if( count1 === 3 || count2 === 3 )
             {
-                Clear(char === "X" ? player_2 : player_1) ;
+                Clear( char === "X" ? player_2 : player_1 ) ;
                 break ;
             }
         }
@@ -131,7 +155,11 @@
       changeValue( value ) ;
       whoWins() ;
     }
-    
+
+    // $:if( char )
+    // {
+    //   try = char === "X" ? player_2 : player_1 ;
+    // }
   </script>
   
   <main>
@@ -140,11 +168,11 @@
       <div class="container p-4 bg-white mt-3 mb-4 rounded">
         <div class="row">
           <form>
-            <div class="form-group">
+            <div class="form-group my-2">
               <label>Player 1 : <input class="form-control bg-dark" type="text" bind:value={player_1}  disabled={isDisabled}/></label>
             </div>
   
-            <div class="form-group">
+            <div class="form-group my-2">
               <label>Player 2 : <input class="form-control bg-dark" type="text" bind:value={player_2}  disabled={isDisabled}/></label>
             </div>
   
@@ -153,6 +181,19 @@
         </div>
       </div>
     </div>
+
+    <div class="box" style="display: {show};">
+      <div>
+        <div id="one" class="players one">
+        {player_1}
+        </div>
+
+        <div id="two" class="players two">
+          {player_2}
+          </div>
+      </div>
+    </div>
+
   
     <div class="box" style="display: {show};">
       <div class="boxContainer p-4 bg-white mt-3 mb-2 rounded">
@@ -170,19 +211,29 @@
   </main>
   
   <style>
+    .one
+    {
+      margin-right: 10px;
+    }
+    .players
+    {
+      background-color: white;
+      color: black;
+      display: inline-block;
+      width: 5em;
+      text-align: center;
+    }
     .boxContainer 
     {
       background-color: rgba(255, 255, 255, 0.2) !important;
       color: white;
     }
-  
     .box 
     {
       display: flex;
       justify-content: center;
       align-items: center;
     }
-  
     p 
     {
       color: white;
@@ -190,19 +241,16 @@
       letter-spacing: 1px;
       font-size: 21px;
     }
-  
     input 
     {
       color: white;
     }
-  
     .box button 
     {
       width: 50px !important;
       height: 50px !important;
       flex-shrink: 0;
     }
-  
     .container 
     {
       margin-top: 30px !important;
@@ -210,7 +258,6 @@
       color: white;
       width: auto;
     }
-  
     .Flex 
     {
       display: flex;
